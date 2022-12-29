@@ -5,19 +5,22 @@ import java.awt.*;
 
 public class SerpinskiyFractalPanel extends JPanel {
     private int step = 0;
+    public int MaxStep = 9;
+    public int sizeOfPanel = 650;
+    private int paddingX = 12;
+    private int paddingY = sizeOfPanel - 130;
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (step == 0) {
-            //g.setColor(Color.BLACK); // устанавливаем цвет рисования
-            g.fillPolygon(new int[]{12, 292, 572}, new int[]{470, 10, 470}, 3);
+            g.fillPolygon(new int[]{paddingX, sizeOfPanel/2, sizeOfPanel - 2*paddingX}, new int[]{paddingY, paddingX, paddingY}, 3);
         }
-        draw(step, new int[]{12, 292, 572}, new int[]{470, 10, 470}, g); // рекурсивный метод
+        draw(step, new int[]{paddingX, sizeOfPanel/2, sizeOfPanel - 2*paddingX}, new int[]{paddingY, paddingX, paddingY}, g); // рекурсивный метод
     }
 
     private void draw(int n, int[] x, int[] y, Graphics gc) {
-        if (this.step > 9) this.step--; // Более 9 шагов не рисуем
+        if (this.step > MaxStep) this.step--;
         if (n > 0) {
             // высчитываем точки
             int x1 = (x[0] + x[1]) / 2;

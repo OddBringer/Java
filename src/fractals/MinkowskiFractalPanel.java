@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 public class MinkowskiFractalPanel extends JPanel {
-    public static final int sizeOfPanel = 590;
+    public static final int sizeOfPanel = 650;
+    public int MaxRange = 3; // Указываем начальные переменные
     private int step = 0;
     public boolean flagToContinue = true;
     public static ArrayList<MyLine> lines = new ArrayList<>();
-    public static double[][] pattern = {
+    public static double[][] pattern = { // Указываем координаты точек
             {0, 0},
             {0.25, 0},
             {0.25, -0.25},
@@ -24,7 +25,7 @@ public class MinkowskiFractalPanel extends JPanel {
 
     public void draw() {
         if (flagToContinue) {
-            if (lines.size() == 0) {
+            if (lines.size() == 0) { // Отрисовка первых линий
                 lines.add(new MyLine(A.x, A.y, A.x + size, A.y));
                 lines.add(new MyLine(A.x + size, A.y, A.x + size, A.y + size));
                 lines.add(new MyLine(A.x + size, A.y + size, A.x, A.y + size));
@@ -55,7 +56,7 @@ public class MinkowskiFractalPanel extends JPanel {
             }
             flagToContinue = false; // отключаем флаг прохода
 
-            if (step > 6) return;
+            if (step > MaxRange) return;
 
             lines = bufferLines; // забываем про старые линии, так как они не актуальны, и запоминаем новые
         }

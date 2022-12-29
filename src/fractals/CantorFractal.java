@@ -4,23 +4,25 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CantorFractal extends JPanel {
-    public final int paddingX = 170;
+    // Установка отступов и ширины начальной линии
+    public  int width = 650; // 243
+    public final int paddingX = 40; //170 // (int)(width*0.05)
     public final int paddingY = 15;
-    public final int height = 25;
+    public final int height = 25; // Высота блока
     public int step = 0;
-    public final int width = 243;
+    public int maxRange = 1;
 
     @Override
-    public void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) { // Отрисовываем компоненты
         super.paintComponent(g);
 
-        g.setColor(Color.BLACK);            // устанавливаем цвет рисования
+        g.setColor(Color.BLACK); // устанавливаем цвет рисования
         paintItems(g, width, paddingX, paddingY, step); // вызываем рекурсивный метод отрисовки шагов
         g.fillRect(paddingX, paddingY, width, height);  // отрисовка первого шага
     }
 
     private void paintItems(Graphics g, int width, int paddingX, int paddingY, int step) {
-        if (this.step > 13) this.step--; // Более рисовать нет смысла
+        if (this.step > maxRange) this.step--;
         if (step == 0) return;
 
         g.fillRect(paddingX, paddingY + height + 7, width > 1 ? width / 3 : 1, height);
@@ -31,7 +33,11 @@ public class CantorFractal extends JPanel {
     }
 
     public void stepIncrement() {
-        step++;
+        if (step >= maxRange) {
+            step = maxRange;
+        } else {
+            step++;
+        }
     }
 
     public void setNullStep() {
